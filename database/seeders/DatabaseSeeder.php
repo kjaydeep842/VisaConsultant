@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'admin@nvvisa.com'],
             [
                 'name' => 'Aditya Sharma',
-                'phone' => '+919876543210',
+                'phone' => '+918980751038',
                 'password' => Hash::make('password123'),
                 'role' => 'admin',
                 'email_verified_at' => now(),
