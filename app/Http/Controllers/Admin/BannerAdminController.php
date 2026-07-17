@@ -37,10 +37,7 @@ class BannerAdminController extends Controller
         $data['order'] = $request->order ?? 0;
 
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('images/banners'), $imageName);
-            $data['image_path'] = 'images/banners/' . $imageName;
+            $data['image_path'] = $request->file('image')->store('banners', 'public');
         }
 
         Banner::create($data);
@@ -71,14 +68,11 @@ class BannerAdminController extends Controller
 
         if ($request->hasFile('image')) {
             // Delete old image
-            if (File::exists(public_path($banner->image_path))) {
-                File::delete(public_path($banner->image_path));
+            if ($banner->image_path) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($banner->image_path);
             }
 
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('images/banners'), $imageName);
-            $data['image_path'] = 'images/banners/' . $imageName;
+            $data['image_path'] = $request->file('image')->store('banners', 'public');
         }
 
         $banner->update($data);
@@ -88,8 +82,8 @@ class BannerAdminController extends Controller
 
     public function destroy(Banner $banner)
     {
-        if (File::exists(public_path($banner->image_path))) {
-            File::delete(public_path($banner->image_path));
+        if ($banner->image_path) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($banner->image_path);
         }
         $banner->delete();
 

@@ -23,7 +23,7 @@
             <label>Image</label>
             @if($award->image_path)
                 <div style="margin-bottom:10px;">
-                    <img src="{{ asset($award->image_path) }}" alt="Current Image" style="max-height:150px; border-radius:8px; border:1px solid #e2e8f0;">
+                    <img src="{{ storageFile($award->image_path) }}" alt="Current Image" style="max-height:150px; border-radius:8px; border:1px solid #e2e8f0;">
                 </div>
             @endif
             <input type="file" name="image" class="admin-form-control" accept="image/*" style="padding:8px 12px;" onchange="if(this.files[0].size > 5242880){alert('File is too big! Max size is 5MB.'); this.value='';}">

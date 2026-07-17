@@ -27,7 +27,7 @@
                 <tr>
                     <td>
                         @if($banner->image_path)
-                            <img src="{{ asset($banner->image_path) }}" alt="{{ $banner->title }}" style="width: 100px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid #e2e8f0;">
+                            <img src="{{ storageFile($banner->image_path) }}" alt="{{ $banner->title }}" style="height: 60px; object-fit: contain; border-radius: 4px; border: 1px solid #e2e8f0;">
                         @else
                             <span style="font-size:12px; color:var(--admin-muted);">No image</span>
                         @endif

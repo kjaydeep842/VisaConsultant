@@ -34,10 +34,7 @@ class AwardAdminController extends Controller
         $data['sort_order'] = $request->sort_order ?? 0;
 
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('images/awards'), $imageName);
-            $data['image_path'] = 'images/awards/' . $imageName;
+            $data['image_path'] = $request->file('image')->store('awards', 'public');
         }
 
         Award::create($data);
@@ -64,14 +61,11 @@ class AwardAdminController extends Controller
         $data['sort_order'] = $request->sort_order ?? 0;
 
         if ($request->hasFile('image')) {
-            if (File::exists(public_path($award->image_path))) {
-                File::delete(public_path($award->image_path));
+            if ($award->image_path) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($award->image_path);
             }
 
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->move(public_path('images/awards'), $imageName);
-            $data['image_path'] = 'images/awards/' . $imageName;
+            $data['image_path'] = $request->file('image')->store('awards', 'public');
         }
 
         $award->update($data);
@@ -81,8 +75,8 @@ class AwardAdminController extends Controller
 
     public function destroy(Award $award)
     {
-        if (File::exists(public_path($award->image_path))) {
-            File::delete(public_path($award->image_path));
+        if ($award->image_path) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($award->image_path);
         }
         $award->delete();
 

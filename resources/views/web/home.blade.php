@@ -10,7 +10,7 @@
                 <div class="swiper-wrapper">
                     @foreach($banners as $banner)
                         <div class="swiper-slide">
-                            <div class="hero" style="background: url('{{ asset($banner->image_path) }}') center center/cover no-repeat; padding: 120px 0 250px; display: flex; align-items: center; position: relative;">
+                            <div class="hero" style="background: url('{{ storageFile($banner->image_path) }}') center center/cover no-repeat; padding: 120px 0 250px; display: flex; align-items: center; position: relative;">
                                 <div class="hero-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4);"></div>
                                 <div class="container hero-content" style="position: relative; z-index: 2; text-align: right; width: 100%; display: flex; flex-direction: column; align-items: flex-end;">
                                     <div class="hero-badge">WHAT WE DO</div>
@@ -515,7 +515,7 @@
                 @foreach($awards as $award)
                     <div class="award-card hover-3d" style="background: var(--bg-white); padding: 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center; border: 1px solid rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; max-width: 280px;">
                         <div style="height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; width: 100%;">
-                            <img src="{{ asset($award->image_path) }}" alt="{{ $award->title }}" style="max-height: 100%; max-width: 100%; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));">
+                            <img src="{{ storageFile($award->image_path) }}" alt="{{ $award->title }}" style="max-height: 100%; max-width: 100%; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));">
                         </div>
                         @if($award->title)
                             <h4 style="font-size: 18px; font-weight: 700; color: var(--primary-color); margin: 0; line-height: 1.4; word-break: break-word;">{{ $award->title }}</h4>
