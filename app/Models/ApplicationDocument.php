@@ -23,6 +23,6 @@ class ApplicationDocument extends Model
 
     public function getUrlAttribute()
     {
-        return asset('storage/' . $this->file_path);
+        return storageFile($this->file_path);
     }
 }

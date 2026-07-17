@@ -42,7 +42,7 @@ class Blog extends Model
     public function getFeaturedImageUrlAttribute()
     {
         if ($this->featured_image) {
-            return asset('storage/' . $this->featured_image);
+            return storageFile($this->featured_image);
         }
         return null;
     }

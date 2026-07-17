@@ -74,7 +74,7 @@
             @foreach($gallery as $item)
                 <div class="form-card" style="padding: 10px; overflow: hidden;">
                     @if($item->image)
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--border-radius); margin-bottom: 10px;">
+                        <img src="{{ storageFile($item->image) }}" alt="{{ $item->title }}" style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--border-radius); margin-bottom: 10px;">
                     @else
                         <div style="width: 100%; height: 200px; background: #cbd5e1; border-radius: var(--border-radius); display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
                             <i class="fas fa-image" style="font-size: 40px; color: #94a3b8;"></i>

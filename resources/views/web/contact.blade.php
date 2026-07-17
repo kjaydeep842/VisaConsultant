@@ -40,7 +40,7 @@
                         <div class="feature-icon" style="background: rgba(11, 61, 145, 0.1); color: var(--primary-color);"><i class="fas fa-envelope"></i></div>
                         <div>
                             <h4>Email Enquiries</h4>
-                            <p>info@nvvisa.com / support@nvvisa.com</p>
+                            <p>nvvisainternational@gmail.com </p>
                         </div>
                     </div>
                 </div>

@@ -24,6 +24,8 @@ use App\Http\Controllers\Admin\VisaCategoryAdminController;
 use App\Http\Controllers\Admin\TeamAdminController;
 use App\Http\Controllers\Admin\GalleryAdminController;
 use App\Http\Controllers\Admin\NewsAdminController;
+use App\Http\Controllers\Admin\BannerAdminController;
+use App\Http\Controllers\Admin\AwardAdminController;
 use App\Http\Controllers\Client\ClientDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -178,6 +180,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     // Gallery
     Route::resource('gallery', GalleryAdminController::class);
 
+    // Banners
+    Route::resource('banners', BannerAdminController::class);
+
+    // Awards
+    Route::resource('awards', AwardAdminController::class);
+
     // Settings
     Route::get('/settings', [SettingAdminController::class, 'index'])->name('settings');
     Route::post('/settings', [SettingAdminController::class, 'update'])->name('settings.update');
@@ -186,6 +194,19 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/analytics', [DashboardController::class, 'analytics'])->name('analytics');
     Route::get('/reports', [DashboardController::class, 'reports'])->name('reports');
 });
+
+// ── File Serving Route (for InfinityFree) ──────────────────────────────────
+Route::get('/file/{path}', function ($path) {
+    $file = storage_path('app/public/'.$path);
+
+    if (!\Illuminate\Support\Facades\File::exists($file)) {
+        abort(404);
+    }
+
+    return response()->file($file, [
+        'Cache-Control' => 'public, max-age=31536000',
+    ]);
+})->where('path', '.*');
 
 // ── 404 ──────────────────────────────────────────────────────────────────
 Route::fallback(function () {

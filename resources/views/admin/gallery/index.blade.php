@@ -28,7 +28,7 @@
                 <tr>
                     <td>
                         @if($item->image)
-                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" style="width: 80px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid #e2e8f0;">
+                            <img src="{{ storageFile($item->image) }}" alt="{{ $item->title }}" style="width: 80px; height: 50px; object-fit: cover; border-radius: 4px; border: 1px solid #e2e8f0;">
                         @else
                             <span style="font-size:12px; color:var(--admin-muted);">No image</span>
                         @endif

@@ -54,6 +54,12 @@
         </a>
 
         <div class="nav-section-label">Content</div>
+        <a href="{{ route('admin.banners.index') }}" class="sidebar-link {{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">
+            <i class="fas fa-images"></i><span>Home Banners</span>
+        </a>
+        <a href="{{ route('admin.awards.index') }}" class="sidebar-link {{ request()->routeIs('admin.awards.*') ? 'active' : '' }}">
+            <i class="fas fa-award"></i><span>Awards & Certs</span>
+        </a>
         <a href="{{ route('admin.blogs.index') }}" class="sidebar-link {{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}">
             <i class="fas fa-newspaper"></i><span>Blogs & Articles</span>
         </a>

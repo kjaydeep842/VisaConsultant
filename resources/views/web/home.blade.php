@@ -3,62 +3,103 @@
 
 @section('content')
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-bg">
-            <video autoplay muted loop playsinline class="hero-video" id="heroVideo">
-                <source src="{{ asset('videos/hero-bg.mp4') }}" type="video/mp4">
-            </video>
-            <div class="hero-overlay"></div>
-        </div>
-        <div class="hero-particles" id="particles"></div>
-        <div class="container hero-content">
-            <div class="hero-badge"><i class="fas fa-star"></i> Rated #1 Immigration Consultancy 2026</div>
-            <h1 class="hero-title">
-                Your Trusted<br>
-                <span class="hero-highlight">Immigration Partner</span>
-            </h1>
-            <p class="hero-subtitle">Expert visa assistance for 25+ countries. 50,000+ successful applications. 98% approval rate.</p>
-            <div class="hero-actions">
-                <a href="{{ route('appointment.index') }}" class="btn-primary-hero">
-                    <i class="fas fa-calendar-check"></i> Book Free Consultation
-                </a>
-                <a href="{{ route('assessment.index') }}" class="btn-secondary-hero">
-                    <i class="fas fa-calculator"></i> Check Eligibility
-                </a>
+    <!-- Hero Section with Dynamic Banners -->
+    <section class="hero-slider" style="position: relative;">
+        @if(isset($banners) && $banners->count() > 0)
+            <div class="swiper heroSwiper">
+                <div class="swiper-wrapper">
+                    @foreach($banners as $banner)
+                        <div class="swiper-slide">
+                            <div class="hero" style="background: url('{{ asset($banner->image_path) }}') center center/cover no-repeat; padding: 120px 0 250px; display: flex; align-items: center; position: relative;">
+                                <div class="hero-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4);"></div>
+                                <div class="container hero-content" style="position: relative; z-index: 2; text-align: right; width: 100%; display: flex; flex-direction: column; align-items: flex-end;">
+                                    <div class="hero-badge">WHAT WE DO</div>
+                                    <h1 class="hero-title" style="font-size: 64px; font-weight: 800; color: var(--secondary-color); margin-bottom: 15px;">
+                                        {!! nl2br(e($banner->title)) !!}
+                                    </h1>
+                                    <p class="hero-subtitle" style="font-size: 18px; color: rgba(255, 255, 255, 0.8); margin-bottom: 40px;">{{ $banner->subtitle }}</p>
+                                    @if($banner->button_text)
+                                    <div class="hero-actions" style="justify-content: flex-end; margin-bottom: 50px;">
+                                        <a href="{{ $banner->button_link ?? '#' }}" class="btn-primary-hero">
+                                            {{ $banner->button_text }}
+                                        </a>
+                                    </div>
+                                    @endif
+                                    <div class="hero-quick-actions" style="display: flex; justify-content: flex-end; gap: 20px; flex-wrap: wrap;">
+                                        <a href="https://wa.me/918980751038" class="quick-action whatsapp" target="_blank">
+                                            <i class="fab fa-whatsapp"></i> WhatsApp
+                                        </a>
+                                        <a href="tel:+918980751038" class="quick-action call">
+                                            <i class="fas fa-phone"></i> Call Now
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="swiper-pagination"></div>
             </div>
-            <div class="hero-quick-actions">
-                <a href="https://wa.me/918980751038" class="quick-action whatsapp" target="_blank">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-                <a href="tel:+918980751038" class="quick-action call">
-                    <i class="fas fa-phone"></i> Call Now
-                </a>
-                <a href="{{ route('tracker.index') }}" class="quick-action track">
-                    <i class="fas fa-search"></i> Track Application
-                </a>
-            </div>
-        </div>
-        <!-- Hero Stats -->
-        <div class="hero-stats-bar">
-            <div class="container">
-                <div class="hero-stats-grid">
-                    <div class="hero-stat">
-                        <strong class="counter" data-target="{{ $stats['years_experience'] }}">0</strong><span>+</span>
-                        <small>Years Experience</small>
+        @else
+            <!-- Fallback Static Banner -->
+            <section class="hero" style="background: url('https://images.unsplash.com/photo-1541535881962-3bb380b08458?q=80&w=2000&auto=format&fit=crop') center center/cover no-repeat; padding: 120px 0 250px; display: flex; align-items: center; position: relative;">
+                <div class="hero-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4);"></div>
+                <div class="container hero-content" style="position: relative; z-index: 2; text-align: right; width: 100%; display: flex; flex-direction: column; align-items: flex-end;">
+                    <div class="hero-badge">WHAT WE DO</div>
+                    <h1 class="hero-title" style="font-size: 64px; font-weight: 800; color: var(--secondary-color); margin-bottom: 15px;">
+                        Immigration Services<br>
+                        <span class="hero-highlight" style="color: var(--secondary-color);">From Expert Adviser</span>
+                    </h1>
+                    <p class="hero-subtitle" style="font-size: 18px; color: rgba(255, 255, 255, 0.8); margin-bottom: 40px;">Join Our Free Visa Counselling Session With Experts</p>
+                    <div class="hero-actions" style="justify-content: flex-end; margin-bottom: 50px;">
+                        <a href="{{ route('appointment.index') }}" class="btn-primary-hero">
+                            <i class="fas fa-calendar-check"></i> Book Free Consultation
+                        </a>
                     </div>
-                    <div class="hero-stat">
-                        <strong class="counter" data-target="{{ $stats['visa_approved'] }}">0</strong><span>+</span>
-                        <small>Visas Approved</small>
+                    <div class="hero-quick-actions" style="display: flex; justify-content: flex-end; gap: 20px; flex-wrap: wrap;">
+                        <a href="https://wa.me/918980751038" class="quick-action whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="tel:+918980751038" class="quick-action call">
+                            <i class="fas fa-phone"></i> Call Now
+                        </a>
                     </div>
-                    <div class="hero-stat">
-                        <strong class="counter" data-target="{{ $stats['countries_served'] }}">0</strong><span>+</span>
-                        <small>Countries Served</small>
+                </div>
+            </section>
+        @endif
+    </section>
+
+    <!-- Hero Cards (Overlapping) -->
+    <section class="hero-cards-section">
+        <div class="container">
+            <div class="hero-cards-wrapper">
+                <div class="hero-feature-card hover-3d" style="background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=500&auto=format&fit=crop') center/cover;">
+                    <i class="fas fa-graduation-cap hero-feature-icon"></i>
+                    <div class="hero-feature-content">
+                        <h3>Dependent Visa</h3>
+                        <span class="hero-feature-number">01</span>
                     </div>
-                    <div class="hero-stat">
-                        <strong class="counter" data-target="{{ $stats['success_rate'] }}">0</strong><span>%</span>
-                        <small>Success Rate</small>
+                </div>
+                <div class="hero-feature-card hover-3d" style="background: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=500&auto=format&fit=crop') center/cover;">
+                    <i class="fas fa-plane hero-feature-icon"></i>
+                    <div class="hero-feature-content">
+                        <h3>Family Visa</h3>
+                        <span class="hero-feature-number">02</span>
                     </div>
+                </div>
+                <div class="hero-feature-card hover-3d" style="background: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=500&auto=format&fit=crop') center/cover;">
+                    <i class="fas fa-chart-line hero-feature-icon"></i>
+                    <div class="hero-feature-content">
+                        <h3>Student visa</h3>
+                        <span class="hero-feature-number">03</span>
+                    </div>
+                </div>
+                <div class="hero-highlight-card hover-3d">
+                    <div>
+                        <h3>Visitor Visa</h3>
+                        <p>Visitor visa are a form of tourist visa that you might be qualified for if you only plan to travel for a short period for tourism purposes.</p>
+                    </div>
+                    <a href="{{ route('services.show', 'visitor-visa') }}" class="btn-read-more">Read More</a>
                 </div>
             </div>
         </div>
@@ -320,7 +361,7 @@
                                 </div>
                                 <p class="testimonial-text">"{{ $t->testimonial }}"</p>
                                 <div class="testimonial-author">
-                                    <img src="{{ $t->avatar ? asset('storage/' . $t->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($t->client_name) . '&background=0B3D91&color=fff' }}"
+                                    <img src="{{ $t->avatar ? storageFile($t->avatar) : 'https://ui-avatars.com/api/?name=' . urlencode($t->client_name) . '&background=0B3D91&color=fff' }}"
                                          alt="{{ $t->client_name }}">
                                     <div>
                                         <strong>{{ $t->client_name }}</strong>
@@ -460,6 +501,57 @@
         </div>
     </section>
 
+    <!-- Awards & Certificates Section -->
+    @if(isset($awards) && $awards->count() > 0)
+    <section class="awards-section section-padding" style="background: var(--bg-light); padding: 80px 0;">
+        <div class="container">
+            <div class="section-header text-center" style="margin-bottom: 50px;">
+                <span class="section-badge" style="margin: 0 auto 15px; display: inline-block;">Excellence</span>
+                <h2 class="section-title">Our Awards & Certificates</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 10px auto 0;">Recognized globally for our outstanding immigration services and customer success.</p>
+            </div>
+            
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+                @foreach($awards as $award)
+                    <div class="award-card hover-3d" style="background: var(--bg-white); padding: 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center; border: 1px solid rgba(0,0,0,0.03); display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; max-width: 280px;">
+                        <div style="height: 140px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; width: 100%;">
+                            <img src="{{ asset($award->image_path) }}" alt="{{ $award->title }}" style="max-height: 100%; max-width: 100%; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));">
+                        </div>
+                        @if($award->title)
+                            <h4 style="font-size: 18px; font-weight: 700; color: var(--primary-color); margin: 0; line-height: 1.4; word-break: break-word;">{{ $award->title }}</h4>
+                        @endif
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!-- Customer Gallery Section -->
+    @if(isset($gallery_images) && $gallery_images->count() > 0)
+    <section class="gallery-section section-padding" style="padding: 80px 0;">
+        <div class="container">
+            <div class="section-header" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 40px;">
+                <div>
+                    <span class="section-badge">Our Clients</span>
+                    <h2 class="section-title text-gradient" style="margin-bottom: 0;">Customer Gallery</h2>
+                </div>
+                <a href="{{ route('gallery') }}" class="btn-primary-hero" style="padding: 10px 25px; font-size: 15px; border-radius: 8px;">View All Photos <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;">
+                @foreach($gallery_images as $image)
+                    <div class="gallery-item hover-3d" style="border-radius: 16px; overflow: hidden; height: 250px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid var(--border-color);">
+                        <img src="{{ storageFile($image->image) }}" alt="{{ $image->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); color: white;">
+                            <h4 style="margin: 0; font-size: 16px; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">{{ Str::limit($image->title, 40) }}</h4>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
     <!-- CTA Banner -->
     <section class="cta-banner-section">
         <div class="container">
@@ -484,6 +576,18 @@
 
 @push('scripts')
     <script>
+    // Hero Banners Swiper
+    if(document.querySelector('.heroSwiper')) {
+        new Swiper('.heroSwiper', {
+            slidesPerView: 1,
+            loop: true,
+            autoplay: { delay: 5000, disableOnInteraction: false },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            effect: 'fade',
+            fadeEffect: { crossFade: true }
+        });
+    }
+
     // Countries Swiper
     new Swiper('.countriesSwiper', {
         slidesPerView: 2,

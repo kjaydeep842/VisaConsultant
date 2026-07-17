@@ -84,7 +84,7 @@ class User extends Authenticatable implements JWTSubject
     public function getAvatarUrlAttribute()
     {
         if ($this->avatar) {
-            return asset('storage/' . $this->avatar);
+            return storageFile($this->avatar);
         }
         return 'https://ui-avatars.com/api/?name=' . urlencode($this->name) . '&background=0B3D91&color=fff';
     }

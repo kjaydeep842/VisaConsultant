@@ -21,7 +21,7 @@
                 <label>Current Image</label>
                 @if($item->image)
                     <div style="margin-bottom:10px;">
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" style="max-width:100%; max-height:200px; border-radius: var(--border-radius); border:1px solid #e2e8f0;">
+                        <img src="{{ storageFile($item->image) }}" alt="{{ $item->title }}" style="max-width:100%; max-height:200px; border-radius: var(--border-radius); border:1px solid #e2e8f0;">
                     </div>
                 @endif
                 <label>Change Image (Optional)</label>

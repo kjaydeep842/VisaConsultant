@@ -32,7 +32,7 @@ class Country extends Model
     public function getFlagUrlAttribute()
     {
         if ($this->flag) {
-            return asset('storage/' . $this->flag);
+            return storageFile($this->flag);
         }
         return "https://flagcdn.com/w80/{$this->code}.png";
     }
@@ -40,7 +40,7 @@ class Country extends Model
     public function getBannerUrlAttribute()
     {
         if ($this->banner) {
-            return asset('storage/' . $this->banner);
+            return storageFile($this->banner);
         }
         return null;
     }

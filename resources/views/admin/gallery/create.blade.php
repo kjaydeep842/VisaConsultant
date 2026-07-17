@@ -18,8 +18,9 @@
             
             <div class="admin-form-group">
                 <label>Select Image *</label>
-                <input type="file" name="image" class="admin-form-control" required style="padding:8px 12px;">
+                <input type="file" name="image" class="admin-form-control" accept="image/*" required style="padding:8px 12px;" onchange="if(this.files[0].size > 5242880){alert('File is too big! Max size is 5MB.'); this.value='';}">
                 <small style="color:var(--admin-muted); display:block; margin-top:4px;">Supported formats: JPEG, PNG, JPG, WEBP. Max size: 5MB.</small>
+                @error('image')<small class="text-danger">{{ $message }}</small>@enderror
             </div>
 
             <div class="admin-form-group">

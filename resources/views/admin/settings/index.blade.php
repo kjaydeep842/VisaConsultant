@@ -26,7 +26,7 @@
                                 @if(isset($settings['company_logo']) && $settings['company_logo'])
                                     <div
                                         style="background:var(--admin-bg); padding:10px; border-radius:8px; border:1px solid #e2e8f0; display:inline-block;">
-                                        <img src="{{ asset('storage/' . $settings['company_logo']) }}" alt="Company Logo"
+                                        <img src="{{ storageFile($settings['company_logo']) }}" alt="Company Logo"
                                             style="max-height:50px; display:block;">
                                     </div>
                                 @else
@@ -54,7 +54,7 @@
                             <label><i class="fas fa-envelope"
                                     style="color:var(--admin-secondary);margin-right:6px;"></i>Support Email</label>
                             <input type="email" name="support_email" class="admin-form-control"
-                                value="{{ $settings['support_email'] ?? 'support@nvvisa.com' }}" required>
+                                value="{{ $settings['support_email'] ?? 'nvvisainternational@gmail.com' }}" required>
                         </div>
                         <div class="admin-form-group">
                             <label><i class="fas fa-phone"

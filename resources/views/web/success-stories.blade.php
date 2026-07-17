@@ -25,7 +25,7 @@
                     <div>
                         <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
                             @if($story->image)
-                                <img src="{{ asset('storage/' . $story->image) }}" alt="{{ $story->client_name }}" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+                                <img src="{{ storageFile($story->image) }}" alt="{{ $story->client_name }}" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
                             @else
                                 <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--primary-color); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px;">
                                     {{ substr($story->client_name, 0, 1) }}

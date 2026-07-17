@@ -15,6 +15,8 @@ use App\Models\Event;
 use App\Models\Gallery;
 use App\Models\SuccessStory;
 use App\Models\NewsletterSubscriber;
+use App\Models\Banner;
+use App\Models\Award;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -32,8 +34,11 @@ class HomeController extends Controller
             'countries_served' => 25,
             'success_rate' => 98,
         ];
+        $banners = Banner::where('is_active', true)->orderBy('order', 'asc')->get();
+        $awards = Award::where('is_active', true)->orderBy('sort_order', 'asc')->get();
+        $gallery_images = \App\Models\Gallery::where('is_active', true)->orderBy('sort_order', 'asc')->take(10)->get();
 
-        return view('web.home', compact('countries', 'services', 'testimonials', 'blogs', 'faqs', 'stats'));
+        return view('web.home', compact('countries', 'services', 'testimonials', 'blogs', 'faqs', 'stats', 'banners', 'awards', 'gallery_images'));
     }
 
     public function about()

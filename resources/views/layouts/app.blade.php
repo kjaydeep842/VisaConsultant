@@ -39,7 +39,7 @@
     <div class="topbar">
         <div class="container">
             <div class="topbar-left">
-                <a href="mailto:info@nvvisa.com"><i class="fas fa-envelope"></i> info@nvvisa.com</a>
+                <a href="mailto:nvvisainternational@gmail.com"><i class="fas fa-envelope"></i> nvvisainternational@gmail.com</a>
                 <a href="tel:+918980751038"><i class="fas fa-phone"></i> +91 98765 43210</a>
             </div>
             <div class="topbar-right">
@@ -64,7 +64,7 @@
         <div class="container nav-container">
             <a href="{{ route('home') }}" class="nav-logo">
                 @if(isset($siteSettings['company_logo']) && $siteSettings['company_logo'])
-                    <img src="{{ asset('storage/' . $siteSettings['company_logo']) }}"
+                    <img src="{{ storageFile($siteSettings['company_logo']) }}"
                         alt="{{ $siteSettings['site_name'] ?? 'NV Visa Consultancy' }}"
                         style="max-height: 45px; width: auto; display: block;">
                 @else
@@ -182,7 +182,7 @@
                     <div class="footer-col footer-about">
                         <div class="footer-logo">
                             @if(isset($siteSettings['company_logo']) && $siteSettings['company_logo'])
-                                <img src="{{ asset('storage/' . $siteSettings['company_logo']) }}"
+                                <img src="{{ storageFile($siteSettings['company_logo']) }}"
                                     alt="{{ $siteSettings['site_name'] ?? 'NV Visa Consultancy' }}"
                                     style="max-height: 45px; width: auto; display: block; margin-bottom: 15px;">
                             @else
@@ -239,7 +239,7 @@
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span>info@nvvisa.com<br>support@nvvisa.com</span>
+                            <span>nvvisainternational@gmail.com</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-clock"></i>

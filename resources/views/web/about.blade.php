@@ -81,7 +81,7 @@
             @forelse($team ?? [] as $member)
             <div class="service-card text-center">
                 <div style="width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin: 0 auto 20px;">
-                    <img src="{{ $member->photo ? asset('storage/'.$member->photo) : 'https://ui-avatars.com/api/?name='.urlencode($member->name).'&background=0B3D91&color=fff&size=120' }}" alt="{{ $member->name }}" style="width:100%; height:100%; object-fit:cover;">
+                    <img src="{{ $member->photo ? storageFile($member->photo) : 'https://ui-avatars.com/api/?name='.urlencode($member->name).'&background=0B3D91&color=fff&size=120' }}" alt="{{ $member->name }}" style="width:100%; height:100%; object-fit:cover;">
                 </div>
                 <h3>{{ $member->name }}</h3>
                 <p style="color: var(--secondary-color); font-weight: 600; font-size:14px; margin-bottom: 10px;">{{ $member->designation }}</p>
